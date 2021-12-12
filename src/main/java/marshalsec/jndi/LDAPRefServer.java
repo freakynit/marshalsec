@@ -34,6 +34,7 @@ import javax.net.ssl.SSLSocketFactory;
 import com.unboundid.ldap.listener.InMemoryDirectoryServer;
 import com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;
 import com.unboundid.ldap.listener.InMemoryListenerConfig;
+import com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchRequest;
 import com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchResult;
 import com.unboundid.ldap.listener.interceptor.InMemoryOperationInterceptor;
 import com.unboundid.ldap.sdk.Entry;
@@ -96,6 +97,11 @@ public class LDAPRefServer {
             this.codebase = cb;
         }
 
+        @Override
+        public void processSearchRequest(InMemoryInterceptedSearchRequest request) throws LDAPException {
+            System.out.println("request: " + request);
+            super.processSearchRequest(request);
+        }
 
         /**
          * {@inheritDoc}
